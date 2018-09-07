@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>SmartApps</title>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            /* Create three unequal columns that floats next to each other */
+            .column {
+                float: left;
+                width: 33.33%;
+                margin-top: 15%;
+                padding: 10px;
+                text-align: center;
+                border-right: 1px solid;
+                height: 300px; /* Should be removed. Only for demonstration */
+            }
+
+            /* Clear floats after the columns */
+            .row:after {
+                content: "";
+                display: table;
+                clear: both;
+            }
+
+            @media screen and (max-width: 600px) {
+                .column {
+                    width: 100%;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+    <div class="row">
+        <div class="column">
+            <form action="/submit" method="POST">
+                Token: <input type="text" name="token" >
+                <br>
+                <br>
+                Pin Code: <input type="text" name="pin" >
+                <br>
+                <br>
+                <input class="w3-button w3-yellow" type="submit" value="Pin Code">
+            </form>
+        </div>
+        <div class="column">
+            <form action="/unlock" method="POST">
+                Token: <input type="text" name="token" >
+                <br>
+                <br>
+                <input class="w3-button w3-yellow" type="submit" value="Unlock">
+            </form>
+        </div>
+        <div class="column">
+            <form action="/lock" method="POST">
+                Token: <input type="text" name="token" >
+                <br>
+                <br>
+                <input class="w3-button w3-yellow" type="submit" value="Lock">
+            </form>
+        </div>
+    </body>
+</html>
