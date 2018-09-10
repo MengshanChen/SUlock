@@ -4,7 +4,6 @@ require 'oauth2'
 require 'json'
 require "net/http"
 require "uri"
-require 'sinatra/activerecord'
 
 set :port, 4567
 set :static, true
@@ -58,7 +57,7 @@ post '/submit' do
     getlockHttp.use_ssl = true
     lockStatus = getlockHttp.request(getlockReq)
 
-    '<h3>Successfully set the pin code: </h3>' + %(<a href="/">Back to home</a>)
+    '<h3>Successfully set the pin code</h3>' + %(<a href="/">Back to home</a>)
 end
 
 
