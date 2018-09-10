@@ -11,7 +11,7 @@
             /* Create three unequal columns that floats next to each other */
             .column {
                 float: left;
-                width: 33.33%;
+                width: 25%;
                 margin-top: 15%;
                 padding: 10px;
                 text-align: center;
@@ -61,6 +61,14 @@
                 <br>
                 <br>
                 <input class="w3-button w3-yellow" type="submit" value="Lock">
+            </form>
+        </div>
+        <div class="column">
+            <form action="/list" method="POST">
+                Token: <input type="text" name="token" >
+                <br>
+                <br>
+                <input class="w3-button w3-yellow" type="submit" value="List">
             </form>
         </div>
     </body>

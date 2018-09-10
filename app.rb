@@ -11,8 +11,8 @@ set :public_folder, "static"
 set :view, "views"
 
 # Our client ID and secret, used to get the access token
-CLIENT_ID = '0221ea6b-71da-47d0-bc54-0ec2d2b70c02' 
-CLIENT_SECRET = 'd2edef94-8539-43bb-9a0f-8ed2e3374bf7'
+CLIENT_ID = '96599e82-0aca-4211-80d6-8a8b4f52d20f' 
+CLIENT_SECRET = '6fff357b-9e70-490a-a6af-61d3517c75e6'
 
 use Rack::Session::Pool, :session_only => false
 
@@ -124,5 +124,34 @@ post '/lock' do
     '<h3>Successfully lock the door </h3>' + %(<a href="/">Back to home</a>)
 end
 
+post '/list' do
+    token = params[:token] || "NONE"
 
+    url = URI.parse(endpoints_uri)
+    req = Net::HTTP::Get.new(url.request_uri)
+
+    req['Authorization'] = 'Bearer ' + token
+
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = (url.scheme == "https")
+
+    response = http.request(req)
+    json = JSON.parse(response.body)
+
+    puts json
+    uri = json[0]['uri']
+
+    puts 'list pin code'
+    doorUrl = uri+ '/keys'
+    getdoorURL = URI.parse(doorUrl)
+    getdoorReq = URI.parse(doorUrl)
+    getdoorReq = Net::HTTP::Get.new(getdoorURL.request_uri)
+    getdoorReq['Authorization'] = 'Bearer' + token
+    getdoorHttp = Net::HTTP.new(getdoorURL.host,getdoorURL.port)
+    getdoorHttp.use_ssl = true
+    
+    doorStatus = getdoorHttp.request(getdoorReq)
+
+    doorStatus.body + %(<a href="/">Back to home</a>)
+end
 
