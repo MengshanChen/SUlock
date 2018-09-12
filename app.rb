@@ -47,9 +47,12 @@ post '/submit' do
     puts json
     uri = json[0]['uri']
 
-    pin = params[:pin] || "None"
+    slot = params[:slot] || "NONE"
+    pin = params[:pin] || "NONE"
+    payload = slot + '-' + pin
+    
     puts 'Unlock the lock with pin code'
-    lockUrl = uri + '/code/' + pin
+    lockUrl = uri + '/code/' + payload  
     getlockURL = URI.parse(lockUrl)
     getlockReq = Net::HTTP::Put.new(getlockURL.request_uri)
     getlockReq['Authorization'] = 'Bearer ' + token
@@ -142,7 +145,7 @@ post '/list' do
     uri = json[0]['uri']
 
     puts 'list pin code'
-    doorUrl = uri+ '/keys'
+    doorUrl = uri + '/keys'
     getdoorURL = URI.parse(doorUrl)
     getdoorReq = URI.parse(doorUrl)
     getdoorReq = Net::HTTP::Get.new(getdoorURL.request_uri)
@@ -152,6 +155,6 @@ post '/list' do
     
     doorStatus = getdoorHttp.request(getdoorReq)
 
-    doorStatus.body + %(<a href="/">Back to home</a>)
+    '<h3> Pincodes: </h3>' + doorStatus.body + %(<p><a href="/">Back to home</a></p>) 
 end
 
